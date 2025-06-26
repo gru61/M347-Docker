@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8" />
+    <title>Installationsanleitung - LB Projekt M347</title>
+</head>
+<body>
+    <h1>Installationsanleitung</h1>
+    <h2>Voraussetzungen</h2>
+    <ul>
+        <li>Internetverbindung</li>
+	<li>Browser</li>
+	<li>Ubuntu 24.04(DESKTOP)</li>
+        <li>Docker + Docker Compose installiert</li>
+        <li>Ports freigegeben: 8080, 8181, 8081, 9000</li>
+    </ul>
+
+    <h2>Installation</h2>
+    <ol>
+        <li>Projekt clonen:<br>
+            <code>git clone https://github.com/Svensemann93/LB-Projekt-M347.git</code>
+        </li>
+        <li>In die Projekt-Ordner wechseln:<br>
+            <code>cd Projekt/wordpress</code>
+        </li>
+        <li>Stack starten:<br>
+            <code>docker compose up -d</code>
+        </li>
+        <li>Prüfen im Browser:<br>
+            <ul>
+                <li>Wordpress: http://localhost:8080</li>
+                <li>MediaWiki: http://localhost:8181</li>
+                <li>Portainer: http://localhost:9000</li>
+                <li>Jira: http://localhost:8081</li>
+            </ul>
+        </li>
+        <li>Stack stoppen:<br>
+            <code>docker compose down</code>
+        </li>
+    </ol>
+
+    <h2>Benutzer / Passwörter</h2>
+    <ul>
+        <li>MariaDB Wordpress → User: wordpress / Passwort: wordpresspass</li>
+        <li>MariaDB MediaWiki → User: wikiuser / Passwort: wikipass</li>
+        <li>Postgres Jira → User: jira / Passwort: jirapass</li>
+        <li>Portainer Admin → beim ersten Start selbst vergeben</li>
+    </ul>
+
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8" />
+    <title>Testplan - LB Projekt M347</title>
+</head>
+<body>
+    <h1>Testplan</h1>
+
+    <h2>Ziel</h2>
+    <p>
+        Überprüfung, ob alle konfigurierten Services (Wordpress, MediaWiki, Jira, Portainer) korrekt starten und im Browser erreichbar sind. Zusätzlich wird geprüft, ob die Datenpersistenz bei einem Neustart der Container erhalten bleibt.
+    </p>
+
+    <h2>Testumgebung</h2>
+    <ul>
+        <li>Ubuntu 24.04 LTS (VM auf VirtualBox)</li>
+        <li>Docker Engine + Docker Compose</li>
+        <li>Git</li>
+        <li>Browser (Firefox / Chrome)</li>
+    </ul>
+
+    <h2>Testszenarien</h2>
+
+    <h3>1. Start der Services</h3>
+    <p>Für jeden Service wird geprüft, ob der Container erfolgreich startet und der Dienst im Browser erreichbar ist.</p>
+    <table border="1">
+        <tr>
+            <th>Service</th>
+            <th>Startkommando</th>
+            <th>Erwartetes Ergebnis</th>
+            <th>Testergebnis</th>
+        </tr>
+        <tr>
+            <td>Wordpress</td>
+            <td>docker compose up -d (im Ordner wordpress)</td>
+            <td>Login/Setup Seite unter http://localhost:8080 erreichbar</td>
+            <td>OK</td>
+        </tr>
+        <tr>
+            <td>MediaWiki</td>
+            <td>docker compose up -d (im Ordner mediawiki)</td>
+            <td>MediaWiki Setup-Seite unter http://localhost:8181 erreichbar</td>
+            <td>OK</td>
+        </tr>
+        <tr>
+            <td>Jira</td>
+            <td>docker compose up -d (im Ordner jira)</td>
+            <td>Jira Setup-Seite unter http://localhost:8081 erreichbar</td>
+            <td>OK</td>
+        </tr>
+        <tr>
+            <td>Portainer</td>
+            <td>docker compose up -d (im Ordner portainer)</td>
+            <td>Portainer Login-Seite unter http://localhost:9000 erreichbar</td>
+            <td>OK</td>
+        </tr>
+    </table>
+
+    <h3>2. Persistenztest</h3>
+    <p>Es wird geprüft, ob die Konfigurationsdaten und Inhalte nach Neustart der Container erhalten bleiben.</p>
+    <ol>
+        <li>Start des jeweiligen Stacks</li>
+        <li>Erstellen von Testinhalten (z.B. Blogpost in Wordpress, Seite in MediaWiki)</li>
+        <li>Stoppen des Stacks (docker compose down)</li>
+        <li>Erneutes Starten des Stacks (docker compose up -d)</li>
+        <li>Prüfen, ob Testinhalte noch vorhanden sind</li>
+    </ol>
+    <p>Erwartetes Ergebnis: Testinhalte sind nach Neustart vorhanden → Datenpersistenz OK.</p>
+    <p>Testergebnis: OK</p>
+
+    <h3>3. Portainer Überprüfung</h3>
+    <p>Mit Portainer wird geprüft, ob alle Container korrekt angezeigt und verwaltet werden können.</p>
+    <p>Testergebnis: OK</p>
+
+    <h2>Fazit</h2>
+    <p>
+        Alle Services konnten erfolgreich getestet werden. Die Anforderungen an das LB Projekt M347 wurden erfüllt.
+    </p>
+
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8" />
+    <title>Konfiguration - LB Projekt M347</title>
+</head>
+<body>
+    <h1>Konfiguration</h1>
+
+    <h2>Allgemeine Architektur</h2>
+    <p>
+        Alle Komponenten wurden als Docker-Services mit Docker Compose aufgesetzt.
+        Für jeden Service liegt eine eigene <code>docker-compose.yml</code> im jeweiligen Verzeichnis:
+    </p>
+    <ul>
+        <li>Wordpress: <code>Projekt/wordpress/docker-compose.yml</code></li>
+        <li>MediaWiki: <code>Projekt/mediawiki/docker-compose.yml</code></li>
+        <li>Jira: <code>Projekt/jira/docker-compose.yml</code></li>
+        <li>Portainer: <code>Projekt/portainer/docker-compose.yml</code></li>
+    </ul>
+
+    <h2>Netzwerk</h2>
+    <p>
+        Alle Services verwenden das Standard-Docker-Netzwerk (bridge). Die Kommunikation zwischen den Containern erfolgt über interne Service-Namen.
+        Localhost Zugriffe sind über folgende Ports möglich:
+    </p>
+    <table border="1">
+        <tr>
+            <th>Service-Namen</th>
+            <th>Port</th>
+        </tr>
+        <tr><td>Wordpress</td><td>8080</td></tr>
+        <tr><td>MediaWiki</td><td>8181</td></tr>
+        <tr><td>Jira</td><td>8081</td></tr>
+        <tr><td>Portainer</td><td>9000</td></tr>
+    </table>
+
+    <h2>Service-Konfigurationen</h2>
+
+    <h3>Wordpress</h3>
+    <ul>
+        <li>Image: <code>wordpress:6.5</code></li>
+        <li>Datenbank: MariaDB (<code>mariadb:11</code>)</li>
+        <li>Volumes:
+            <ul>
+                <li><code>wp_data</code>: Wordpress-Daten</li>
+                <li><code>db_data</code>: MariaDB-Daten</li>
+            </ul>
+        </li>
+        <li>Environment-Variablen:
+            <ul>
+                <li>WORDPRESS_DB_HOST</li>
+                <li>WORDPRESS_DB_USER</li>
+                <li>WORDPRESS_DB_PASSWORD</li>
+                <li>WORDPRESS_DB_NAME</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h3>MediaWiki</h3>
+    <ul>
+        <li>Image: <code>mediawiki:1.41</code></li>
+        <li>Datenbank: MariaDB (<code>mariadb:11</code>)</li>
+        <li>Volumes:
+            <ul>
+                <li><code>mw_data</code>: MediaWiki-Daten</li>
+                <li><code>db_data</code>: MariaDB-Daten</li>
+            </ul>
+        </li>
+        <li>Environment-Variablen:
+            <ul>
+                <li>MEDIAWIKI_DB_TYPE</li>
+                <li>MEDIAWIKI_DB_HOST</li>
+                <li>MEDIAWIKI_DB_USER</li>
+                <li>MEDIAWIKI_DB_PASSWORD</li>
+                <li>MEDIAWIKI_DB_NAME</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h3>Jira</h3>
+    <ul>
+        <li>Image: <code>atlassian/jira-software:9.15.0</code></li>
+        <li>Datenbank: PostgreSQL (<code>postgres:15</code>)</li>
+        <li>Volumes:
+            <ul>
+                <li><code>jira_data</code>: Jira-Daten</li>
+                <li><code>db_data</code>: PostgreSQL-Daten</li>
+            </ul>
+        </li>
+        <li>Environment-Variablen:
+            <ul>
+                <li>ATL_JDBC_URL</li>
+                <li>ATL_JDBC_USER</li>
+                <li>ATL_JDBC_PASSWORD</li>
+                <li>POSTGRES_DB</li>
+                <li>POSTGRES_USER</li>
+                <li>POSTGRES_PASSWORD</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h3>Portainer</h3>
+    <ul>
+        <li>Image: <code>portainer/portainer-ce:latest</code></li>
+        <li>Volumes:
+            <ul>
+                <li><code>portainer_data</code>: Portainer-Daten</li>
+                <li><code>/var/run/docker.sock</code>: Docker API Zugriff</li>
+            </ul>
+        </li>
+    </ul>
+
+</body>
+</html>

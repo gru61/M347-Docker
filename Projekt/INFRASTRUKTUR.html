@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8" />
+    <title>Infrastrukturdiagramm - LB Projekt M347</title>
+</head>
+<body>
+    <h1>Infrastrukturdiagramm</h1>
+
+    <p>Die folgende Darstellung zeigt den Aufbau der eingesetzten Container-basierten Lösung:</p>
+
+    <pre>
++---------------------------+
+|        Ubuntu 24.04       |
+|    (VirtualBox VM)        |
+|                           |
+|  +---------------------+  |
+|  |    Docker Engine    |  |
+|  +---------------------+  |
+|         |    |    |    |  |
+|         V    V    V    V  |
+| +-----------+             |
+| | Wordpress | (8080)      |
+| +-----------+             |
+| +-----------+             |
+| | MediaWiki | (8181)      |
+| +-----------+             |
+| +-----------+             |
+| |   Jira    | (8081)      |
+| +-----------+             |
+| +-----------+             |
+| | Portainer | (9000)      |
+| +-----------+             |
+|                           |
++---------------------------+
+    </pre>
+
+    <p>
+        <strong>Hinweise:</strong>
+    </p>
+    <ul>
+        <li>Die Dienste laufen alle als eigenständige Docker-Container.</li>
+        <li>Die Kommunikation erfolgt über das interne Docker-Netzwerk.</li>
+    </ul>
+
+</body>
+</html>

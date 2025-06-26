@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8" />
+    <title>Abschlussplan - LB Projekt M347</title>
+</head>
+<body>
+    <h1>Abschlussplan</h1>
+
+    <h2>1. Test und Screenshot-Plan</h2>
+
+    <p>Folgende Screenshots werden zur Dokumentation der Tests und für den Nachweis der Funktionalität und Persistenz erstellt und im Ordner <code>Projekt/screenshots/</code> abgelegt:</p>
+
+    <ul>
+        <li>Wordpress:
+            <ul>
+                <li><code>wordpress_hello_world.png</code> (Hello World Post im Browser sichtbar)</li>
+                <li><code>wordpress_persistenz_test.png</code> (Nach Stack Restart noch sichtbar)</li>
+            </ul>
+        </li>
+        <li>MediaWiki:
+            <ul>
+                <li><code>mediawiki_testseite.png</code> (Testseite erstellt im Browser sichtbar)</li>
+                <li><code>mediawiki_persistenz_test.png</code> (Nach Stack Restart noch sichtbar)</li>
+            </ul>
+        </li>
+        <li>Jira:
+            <ul>
+                <li><code>jira_setup_screen.png</code> (Setup Screen im Browser sichtbar)</li>
+            </ul>
+        </li>
+        <li>Portainer:
+            <ul>
+                <li><code>portainer_overview.png</code> (Portainer Übersicht aller laufenden Container)</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h2>2. Vorgehen Schritt für Schritt</h2>
+
+    <ol>
+        <li>Wordpress Stack starten:
+            <pre>cd Projekt/wordpress
+docker compose up -d</pre>
+        </li>
+        <li>Im Browser: http://localhost:8080 → "Hello World" Beitrag erstellen.</li>
+        <li>Screenshot speichern als <code>wordpress_hello_world.png</code>.</li>
+        <li>Stack stoppen:
+            <pre>docker compose down</pre>
+        </li>
+        <li>Stack erneut starten:
+            <pre>docker compose up -d</pre>
+        </li>
+        <li>Im Browser prüfen → Beitrag noch da? → Screenshot <code>wordpress_persistenz_test.png</code>.</li>
+
+        <li>MediaWiki Stack testen analog:
+            <pre>cd Projekt/mediawiki
+docker compose up -d</pre>
+            <p>Testseite erstellen → Screenshot <code>mediawiki_testseite.png</code> → Persistenz testen → Screenshot <code>mediawiki_persistenz_test.png</code>.</p>
+        </li>
+
+        <li>Jira Stack starten:
+            <pre>cd Projekt/jira
+docker compose up -d</pre>
+            <p>Setup-Screen öffnen → Screenshot <code>jira_setup_screen.png</code>.</p>
+        </li>
+
+        <li>Portainer Stack starten:
+            <pre>cd Projekt/portainer
+docker compose up -d</pre>
+            <p>Portainer öffnen → Übersicht aller Container → Screenshot <code>portainer_overview.png</code>.</p>
+        </li>
+    </ol>
+
+    <h2>3. Speicherort der Screenshots</h2>
+
+    <p>Alle Screenshots werden im Ordner <code>Projekt/screenshots/</code> gespeichert:</p>
+
+    <pre>
+Projekt/screenshots/wordpress_hello_world.png
+Projekt/screenshots/wordpress_persistenz_test.png
+Projekt/screenshots/mediawiki_testseite.png
+Projekt/screenshots/mediawiki_persistenz_test.png
+Projekt/screenshots/jira_setup_screen.png
+Projekt/screenshots/portainer_overview.png
+    </pre>
+
+    <h2>4. Finaler Git Push</h2>
+
+    <ol>
+        <li>Alle neuen Files und Screenshots hinzufügen:
+            <pre>git add Projekt/ABSCHLUSSPLAN.html Projekt/screenshots/*</pre>
+        </li>
+        <li>Commit erstellen:
+            <pre>git commit -m "Finale Doku und Screenshots für LB Projekt"</pre>
+        </li>
+        <li>Push:
+            <pre>git push origin master</pre>
+        </li>
+    </ol>
+
+</body>
+</html>

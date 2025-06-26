@@ -1,0 +1,35 @@
+version: '3.9'
+
+services:
+  db:
+    image: mariadb:11
+    container_name: mediawiki_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: wikisecret
+      MYSQL_DATABASE: mediawiki
+      MYSQL_USER: wikiuser
+      MYSQL_PASSWORD: wikipass
+    volumes:
+      - db_data:/var/lib/mysql
+
+  mediawiki:
+    image: mediawiki:1.41
+    container_name: mediawiki_app
+    depends_on:
+      - db
+    ports:
+      - "8181:80"
+    restart: always
+    environment:
+      MEDIAWIKI_DB_TYPE: mysql
+      MEDIAWIKI_DB_HOST: db
+      MEDIAWIKI_DB_USER: wikiuser
+      MEDIAWIKI_DB_PASSWORD: wikipass
+      MEDIAWIKI_DB_NAME: mediawiki
+    volumes:
+      - mw_data:/var/www/html
+
+volumes:
+  db_data:
+  mw_data:
